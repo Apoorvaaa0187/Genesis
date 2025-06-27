@@ -7,45 +7,231 @@
   <title>Admin Dashboard - GenGuard</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-br from-blue-50 to-purple-100 min-h-screen p-6">
-  <div class="max-w-7xl mx-auto space-y-8">
-    <header class="flex justify-between items-center">
-      <h1 class="text-3xl font-bold text-blue-700">🏥 Hospital Dashboard - Admin</h1>
-      <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg">Logout</button>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-gray-900 p-6 relative overflow-x-hidden">
+  <!-- Animated DNA Background -->
+  <div class="fixed inset-0 opacity-5 pointer-events-none">
+    <div class="dna-strand"></div>
+    <div class="dna-strand-2"></div>
+  </div>
+  <!-- Floating Particles -->
+  <div class="particles fixed inset-0 pointer-events-none">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+  <div class="max-w-7xl mx-auto space-y-8 relative z-10">
+    <!-- Header -->
+    <header class="flex justify-between items-center p-6 bg-gray-800/30 backdrop-blur-lg rounded-2xl border border-gray-700/50 shadow-2xl">
+      <div class="flex items-center space-x-4">
+        <div class="text-3xl">🧬</div>
+        <div>
+          <h1 class="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            GenGuard Dashboard
+          </h1>
+          <p class="text-gray-400 text-sm">Hospital Administration Portal</p>
+        </div>
+      </div>
+      <button onclick="logout()" class="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-6 py-3 rounded-xl transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-red-500/25">
+        <span class="flex items-center space-x-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+          </svg>
+          <span>Logout</span>
+        </span>
+      </button>
     </header>
-
     <!-- Add Patient Section -->
-    <section class="bg-white p-6 rounded-lg shadow-lg">
-      <h2 class="text-xl font-semibold mb-4">➕ Add Patient Record</h2>
-      <form id="patient-form" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <input type="text" id="name" name="name" placeholder="Patient Name" required class="p-2 border rounded">
-        <input type="text" id="patientId" name="patientId" placeholder="Patient ID" required class="p-2 border rounded">
-        <input type="number" id="age" name="age" placeholder="Patient Age" required class="p-2 border rounded">
-        <input type="file" id="csv" name="csv" accept=".csv" required class="md:col-span-3 p-2 border rounded">
+    <section class="bg-gray-800/30 backdrop-blur-lg p-8 rounded-2xl border border-gray-700/50 shadow-2xl">
+      <div class="flex items-center space-x-3 mb-6">
+        <div class="text-2xl">👤</div>
+        <h2 class="text-2xl font-bold text-white">Add Patient Record</h2>
+      </div>
+      <form id="patient-form" enctype="multipart/form-data" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="space-y-2">
+          <label class="text-gray-300 text-sm font-medium">Patient Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter patient name" required 
+                 class="w-full p-4 bg-gray-700/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300">
+        </div>
+        <div class="space-y-2">
+          <label class="text-gray-300 text-sm font-medium">Patient ID</label>
+          <input type="text" id="patientId" name="patientId" placeholder="Enter patient ID" required 
+                 class="w-full p-4 bg-gray-700/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300">
+        </div>
+        <div class="space-y-2">
+          <label class="text-gray-300 text-sm font-medium">Patient Age</label>
+          <input type="number" id="age" name="age" placeholder="Enter age" required 
+                 class="w-full p-4 bg-gray-700/50 border border-gray-600/50 rounded-xl text-white placeholder-gray-400 focus:border-cyan-400 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-300">
+        </div>
+        <div class="md:col-span-3 space-y-2">
+          <label class="text-gray-300 text-sm font-medium">Genetic Data CSV File</label>
+          <input type="file" id="csv" name="csv" accept=".csv" required 
+                 class="w-full p-4 bg-gray-700/50 border border-gray-600/50 rounded-xl text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-cyan-600 file:text-white hover:file:bg-cyan-700 transition-all duration-300">
+        </div>
         <div class="md:col-span-3">
-          <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg">Add Patient</button>
+          <button type="submit" class="bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-cyan-500/25">
+            <span class="flex items-center space-x-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+              </svg>
+              <span>Add Patient Record</span>
+            </span>
+          </button>
         </div>
       </form>
     </section>
-
     <!-- Patient Records Section -->
-    <section class="bg-white p-6 rounded-lg shadow-lg">
-      <h2 class="text-xl font-semibold mb-4">📋 Patient Records</h2>
-      <button onclick="loadPatients()" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg mb-4">Refresh Records</button>
+    <section class="bg-white/90 backdrop-blur-lg p-8 rounded-2xl border border-gray-300 shadow-2xl">
+      <div class="flex items-center justify-between mb-6">
+        <div class="flex items-center space-x-3">
+          <div class="text-2xl">📋</div>
+          <h2 class="text-2xl font-bold text-gray-900">Patient Records</h2>
+        </div>
+        <button onclick="loadPatients()" class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-green-500/25">
+          <span class="flex items-center space-x-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+            </svg>
+            <span>Refresh Records</span>
+          </span>
+        </button>
+      </div>
       <div id="patients-container" class="overflow-x-auto">
-        <div class="text-center text-gray-500 py-8">Click "Refresh Records" to load patient data</div>
+        <div class="text-center text-gray-500 py-12">
+          <div class="text-4xl mb-4">🔄</div>
+          <p>Click "Refresh Records" to load patient data</p>
+        </div>
       </div>
     </section>
-
     <!-- Multi-Patient CSV Analysis Section -->
-    <section class="bg-white p-6 rounded-lg shadow-lg">
-      <h2 class="text-xl font-semibold mb-4">📂 Upload Multi-Patient Mutation CSV</h2>
-      <input type="file" id="multiPatientCsv" accept=".csv" class="mb-4">
-      <button onclick="uploadMultiPatientCsv()" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg mb-4">Upload & Analyze</button>
-      <div id="multi-patient-table-container" class="overflow-x-auto mt-6"></div>
+    <section class="bg-gray-800/30 backdrop-blur-lg p-8 rounded-2xl border border-gray-700/50 shadow-2xl">
+      <div class="flex items-center space-x-3 mb-6">
+        <div class="text-2xl">🧪</div>
+        <h2 class="text-2xl font-bold text-white">Multi-Patient Mutation Analysis</h2>
+      </div>
+      <div class="space-y-6">
+        <div class="space-y-2">
+          <label class="text-gray-300 text-sm font-medium">Upload Multi-Patient CSV</label>
+          <input type="file" id="multiPatientCsv" accept=".csv" 
+                 class="w-full p-4 bg-gray-700/50 border border-gray-600/50 rounded-xl text-white file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-purple-600 file:text-white hover:file:bg-purple-700 transition-all duration-300">
+        </div>
+        <div class="flex flex-wrap gap-4">
+          <button onclick="uploadMultiPatientCsv()" class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-purple-500/25">
+            <span class="flex items-center space-x-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+              </svg>
+              <span>Upload & Analyze</span>
+            </span>
+          </button>
+          <a href="/data/sample_multi_patient.csv" download class="inline-flex items-center space-x-2 text-cyan-400 hover:text-cyan-300 px-4 py-3 rounded-xl border border-cyan-400/30 hover:border-cyan-400/60 transition-all duration-300">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-4-4m4 4l4-4m-6 8h8a2 2 0 002-2V7a2 2 0 00-2-2H8a2 2 0 00-2 2v11a2 2 0 002 2z"></path>
+            </svg>
+            <span>Download Sample CSV</span>
+          </a>
+        </div>
+        <div id="multi-patient-table-container" class="overflow-x-auto"></div>
+      </div>
     </section>
   </div>
-
+  <!-- Custom Styles -->
+  <style>
+    /* DNA Strand Animation */
+    .dna-strand {
+      position: absolute;
+      top: 10%;
+      left: 5%;
+      width: 4px;
+      height: 80%;
+      background: linear-gradient(45deg, #1e40af, #0ea5e9);
+      border-radius: 2px;
+      animation: dna-rotate 12s linear infinite;
+    }
+    .dna-strand-2 {
+      position: absolute;
+      top: 10%;
+      right: 5%;
+      width: 4px;
+      height: 80%;
+      background: linear-gradient(-45deg, #3730a3, #1e40af);
+      border-radius: 2px;
+      animation: dna-rotate 12s linear infinite reverse;
+    }
+    @keyframes dna-rotate {
+      0% { transform: rotateZ(0deg) rotateY(0deg); }
+      100% { transform: rotateZ(360deg) rotateY(360deg); }
+    }
+    /* Floating Particles */
+    .particle {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      background: rgba(139, 92, 246, 0.4);
+      border-radius: 50%;
+      animation: float 8s ease-in-out infinite;
+    }
+    .particle:nth-child(1) {
+      top: 15%;
+      left: 15%;
+      animation-delay: 0s;
+    }
+    .particle:nth-child(2) {
+      top: 70%;
+      left: 85%;
+      animation-delay: 2s;
+      background: rgba(6, 182, 212, 0.4);
+    }
+    .particle:nth-child(3) {
+      top: 85%;
+      left: 25%;
+      animation-delay: 4s;
+      background: rgba(236, 72, 153, 0.4);
+    }
+    .particle:nth-child(4) {
+      top: 25%;
+      left: 75%;
+      animation-delay: 6s;
+    }
+    .particle:nth-child(5) {
+      top: 55%;
+      left: 5%;
+      animation-delay: 8s;
+      background: rgba(6, 182, 212, 0.4);
+    }
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px) translateX(0px);
+        opacity: 0.4;
+      }
+      33% {
+        transform: translateY(-15px) translateX(8px);
+        opacity: 0.8;
+      }
+      66% {
+        transform: translateY(8px) translateX(-8px);
+        opacity: 0.3;
+      }
+    }
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(55, 65, 81, 0.3);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(139, 92, 246, 0.5);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(139, 92, 246, 0.7);
+    }
+  </style>
+  <!-- ...existing script code... -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
   <script>
     // Load patients on page load
@@ -175,11 +361,21 @@
       const fileInput = document.getElementById('multiPatientCsv');
       const file = fileInput.files[0];
       if (!file) return alert('Please select a CSV file.');
-      
       Papa.parse(file, {
         header: true,
         skipEmptyLines: true,
         complete: function(results) {
+          if (!results.data || results.data.length === 0 || Object.keys(results.data[0]).length === 1) {
+            document.getElementById('multi-patient-table-container').innerHTML = '<div class="text-center text-red-500 py-4">Invalid or empty CSV file.</div>';
+            return;
+          }
+          // Check for required columns
+          const requiredCols = ['UserID', 'Gene', 'Mutation'];
+          const hasAllCols = requiredCols.every(col => Object.keys(results.data[0]).includes(col));
+          if (!hasAllCols) {
+            document.getElementById('multi-patient-table-container').innerHTML = '<div class="text-center text-red-500 py-4">CSV must have columns: UserID, Gene, Mutation.</div>';
+            return;
+          }
           processMultiPatientData(results.data);
         },
         error: function(error) {
@@ -218,42 +414,54 @@
       }
       
       let html = `
-        <div class="mb-4">
-          <h3 class="text-lg font-semibold mb-2">Mutation Analysis Results</h3>
-          <p class="text-sm text-gray-600">Found ${Object.keys(multiPatientData).length} patients with ${allMutations.length} unique mutations</p>
+        <div class="mb-6 p-4 bg-white/90 rounded-xl border border-purple-200">
+          <h3 class="text-xl font-bold text-gray-900 mb-2">🧪 Mutation Analysis Results</h3>
+          <p class="text-gray-700">Found <span class="text-cyan-700 font-semibold">${Object.keys(multiPatientData).length}</span> patients with <span class="text-purple-700 font-semibold">${allMutations.length}</span> unique mutations</p>
         </div>
-        <table class="min-w-full border-collapse border border-gray-300">
-          <thead>
-            <tr>
-              <th class="border border-gray-300 px-4 py-2 bg-blue-100">Gene</th>
-              <th class="border border-gray-300 px-4 py-2 bg-blue-100">Mutation</th>
+        
+        <div class="bg-white/90 rounded-xl overflow-hidden border border-gray-200 mb-6">
+          <table class="min-w-full">
+            <thead>
+              <tr class="bg-gradient-to-r from-purple-100/70 to-pink-100/70">
+                <th class="px-4 py-3 text-left text-purple-700 font-semibold">Gene</th>
+                <th class="px-4 py-3 text-left text-purple-700 font-semibold">Mutation</th>
       `;
       
       Object.keys(multiPatientData).forEach(uid => {
-        html += `<th class="border border-gray-300 px-4 py-2 bg-purple-100">${uid}</th>`;
+        html += `<th class="px-4 py-3 text-center text-cyan-700 font-semibold">${uid}</th>`;
       });
       
       html += `</tr></thead><tbody>`;
       
-      allMutations.forEach(mutKey => {
+      allMutations.forEach((mutKey, index) => {
         const [gene, mutation] = mutKey.split('|');
-        html += `<tr>
-          <td class="border border-gray-300 px-4 py-2">${gene}</td>
-          <td class="border border-gray-300 px-4 py-2">${mutation}</td>`;
+        const rowClass = index % 2 === 0 ? 'bg-gray-50' : 'bg-white';
+        html += `<tr class="${rowClass}">
+          <td class="px-4 py-3 text-gray-900 font-medium">${gene}</td>
+          <td class="px-4 py-3 text-gray-700">${mutation}</td>`;
         
         Object.keys(multiPatientData).forEach(uid => {
           const hasMutation = multiPatientData[uid].some(m => m.gene === gene && m.mutation === mutation);
-          html += `<td class="border border-gray-300 px-4 py-2 text-center">${hasMutation ? '✅' : ''}</td>`;
+          html += `<td class="px-4 py-3 text-center">${hasMutation ? '<span class="text-green-600 text-lg">✅</span>' : '<span class="text-gray-400">—</span>'}</td>`;
         });
         
         html += `</tr>`;
       });
       
-      html += `</tbody></table>`;
+      html += `</tbody></table></div>`;
 
-      html += `<div class="flex flex-wrap gap-4 mt-6">`;
+      html += `<div class="flex flex-wrap gap-4">`;
       Object.keys(multiPatientData).forEach(uid => {
-        html += `<button onclick="showPatientReport('${uid}')" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg">Show Report: ${uid}</button>`;
+        html += `
+          <button onclick="showPatientReport('${uid}')" class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-6 py-3 rounded-xl font-semibold transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-green-500/25">
+            <span class="flex items-center space-x-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+              <span>Report: ${uid}</span>
+            </span>
+          </button>
+        `;
       });
       html += `</div>`;
 

@@ -19,13 +19,17 @@ app.use(express.static(path.join(__dirname, 'main', 'admin')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // MongoDB connection
-mongoose.connect('mongodb://127.0.0.1:27017/hospitalDB', {
+mongoose.connect('mongodb+srv://admin:admin123@cluster0.euozim4.mongodb.net/hospitalDB?retryWrites=true&w=majority', {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: true
+})
+.then(() => {
+  console.log('✅ MongoDB connected');
+  console.log('📦 Using database:', mongoose.connection.name);
+})
+.catch((err) => {
+  console.error('❌ MongoDB connection error:', err.message);
 });
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB error:'));
-db.once('open', () => console.log('✅ MongoDB connected'));
 
 // Multer setup for file upload
 const storage = multer.diskStorage({
@@ -45,24 +49,33 @@ const upload = multer({ storage });
 const PatientSchema = new mongoose.Schema({
   name: String,
   patientId: String,
-  csvFile: String
+  age: Number, // ✅ Add this
+  csvFile: String,
+  createdAt: {
+    type: Date,
+    default: Date.now // ✅ Timestamp when created
+  }
 });
-const Patient = mongoose.model('Patient', PatientSchema);
 
 // API Route
 app.post('/api/patient', upload.single('csv'), async (req, res) => {
-  const { name, patientId } = req.body;
+  const { name, patientId, age } = req.body;
   const csvFile = req.file ? req.file.path : null;
 
-  if (!name || !patientId || !csvFile) {
+  console.log('➡️ Incoming form:', req.body);
+  console.log('📄 File uploaded:', req.file);
+
+  if (!name || !patientId || !csvFile || !age) {
     return res.status(400).json({ error: 'Missing fields' });
   }
 
   try {
-    const newPatient = new Patient({ name, patientId, csvFile });
+    const newPatient = new Patient({ name, patientId, age, csvFile });
     await newPatient.save();
+    console.log('✅ Saved:', newPatient);
     res.status(200).json({ message: 'Patient saved', patient: newPatient });
   } catch (err) {
+    console.error('❌ Error saving:', err);
     res.status(500).json({ error: 'Database error', details: err });
   }
 });
@@ -75,4 +88,11 @@ app.get('/', (req, res) => {
 // Start Server
 app.listen(PORT, () => {
   console.log(`🚀 Server running at http://localhost:${PORT}`);
+});
+
+db.once('open', async () => {
+  console.log('✅ MongoDB connected');
+
+  // Confirm which DB you are connected to
+  console.log('📦 Using database:', db.name);
 });

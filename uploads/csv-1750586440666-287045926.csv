@@ -1,0 +1,16 @@
+Gene,Mutation,Disease
+BRCA1,c.68_69delAG,Breast Cancer
+TP53,c.215C>G,Lung Cancer
+CFTR,F508del,Cystic Fibrosis
+APC,c.3927_3931delAAAGA,Colorectal Cancer
+EGFR,L858R,Non-Small Cell Lung Cancer
+KRAS,G12D,Pancreatic Cancer
+PTEN,R130Q,Endometrial Cancer
+PIK3CA,H1047R,Breast Cancer
+MLH1,c.793C>T,Lynch Syndrome
+MSH2,c.942+3A>T,Lynch Syndrome
+ATM,c.7271T>G,Ataxia-Telangiectasia
+CHEK2,1100delC,Hereditary Breast Cancer
+PALB2,c.3113G>A,Pancreatic Cancer
+RET,C634R,Medullary Thyroid Carcinoma
+VHL,R200W,Von Hippel–Lindau disease

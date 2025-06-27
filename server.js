@@ -51,6 +51,15 @@ const PatientSchema = new mongoose.Schema({
 });
 const Patient = mongoose.model('Patient', PatientSchema);
 
+// User Schema for authentication
+const UserSchema = new mongoose.Schema({
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  name: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now }
+});
+const User = mongoose.model('User', UserSchema);
+
 // Routes
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'main', 'user_site', 'index.html'));
@@ -62,6 +71,64 @@ app.get('/login.html', (req, res) => {
 
 app.get('/dashboard.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'main', 'admin', 'dashboard.html'));
+});
+
+// User Authentication Routes
+app.post('/api/user/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    
+    // For demo purposes, we'll use a simple check
+    // In production, you should use proper password hashing
+    const user = await User.findOne({ email });
+    
+    if (!user || user.password !== password) {
+      return res.status(401).json({ error: 'Invalid credentials' });
+    }
+    
+    res.json({ 
+      success: true,
+      user: {
+        name: user.name,
+        email: user.email
+      }
+    });
+  } catch (err) {
+    console.error('Login error:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
+
+app.post('/api/user/register', async (req, res) => {
+  try {
+    const { name, email, password } = req.body;
+    
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: 'Email already registered' });
+    }
+    
+    // Create new user
+    const user = new User({
+      name,
+      email,
+      password // In production, hash the password
+    });
+    
+    await user.save();
+    
+    res.status(201).json({
+      success: true,
+      user: {
+        name: user.name,
+        email: user.email
+      }
+    });
+  } catch (err) {
+    console.error('Registration error:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
 });
 
 // API Routes

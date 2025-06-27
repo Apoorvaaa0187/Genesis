@@ -298,8 +298,6 @@
 
             <!-- Results Table -->
             <div id="analysis-results">
-                <!-- PDF Download Button (moved above for visibility) -->
-                <button id="downloadPdf" class="mt-2 mb-6 px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-all duration-200 disabled:opacity-50">Download Detailed PDF Report</button>
                 <div class="glass-morphism rounded-2xl p-8">
                     <div class="flex items-center space-x-2 mb-6">
                         <i class="fas fa-microscope text-2xl text-blue-400"></i>
@@ -346,8 +344,17 @@
                         </table>
                     </div>
                 </div>
-                <!-- PDF Download Button -->
-                <button id="downloadPdf" class="mt-6 px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg">Download PDF Report</button>
+            </div>
+
+            <!-- Disease Forecast Timeline Section -->
+            <div id="disease-forecast" class="mt-8 p-6 bg-white dark:bg-slate-800 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold mb-6 text-slate-900 dark:text-white flex items-center">
+                    <i class="fas fa-calendar-alt mr-3 text-blue-500"></i>
+                    Disease Forecast Timeline
+                </h3>
+                <div id="timeline-container" class="space-y-6">
+                    <!-- Timeline will be populated by JavaScript -->
+                </div>
             </div>
         </div>
 
@@ -1191,6 +1198,59 @@
             origUpdateResultsTable(results);
             updatePdfButtonState();
         };
+
+        async function loadDiseaseForecast(detectedGenes) {
+            const response = await fetch('/data/mutation_disease_forecast.csv');
+            const csvText = await response.text();
+            
+            Papa.parse(csvText, {
+                header: true,
+                complete: function(results) {
+                    const forecasts = results.data.filter(row => 
+                        detectedGenes.includes(row.Gene)
+                    );
+                    
+                    const timelineContainer = document.getElementById('timeline-container');
+                    timelineContainer.innerHTML = '';
+                    
+                    forecasts.forEach(forecast => {
+                        const riskClass = getRiskClass(parseFloat(forecast['Risk (%)']));
+                        const timelineItem = `
+                            <div class="flex items-center space-x-4 p-4 bg-slate-50 dark:bg-slate-700 rounded-lg hover:shadow-md transition-all">
+                                <div class="w-24 text-center">
+                                    <span class="text-lg font-bold text-blue-600 dark:text-blue-300">Age ${forecast['Age Start']}</span>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="flex items-center justify-between">
+                                        <h4 class="text-lg font-semibold text-slate-900 dark:text-white">${forecast.Disease}</h4>
+                                        <span class="text-lg font-bold ${riskClass}">${forecast['Risk (%)']}% Risk</span>
+                                    </div>
+                                    <p class="text-slate-600 dark:text-slate-400 mt-1">${forecast.Advice}</p>
+                                    <div class="mt-2 w-full bg-slate-200 dark:bg-slate-600 rounded-full h-2">
+                                        <div class="h-2 rounded-full progress-bar" style="width: ${forecast['Risk (%)']}%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                        timelineContainer.innerHTML += timelineItem;
+                    });
+                }
+            });
+        }
+
+        function getRiskClass(risk) {
+            if (risk >= 50) return 'risk-high';
+            if (risk >= 25) return 'risk-medium';
+            return 'risk-low';
+        }
+
+        // Modify the existing analyzeMutations function to include forecast
+        const originalAnalyzeMutations = analyzeMutations;
+        analyzeMutations = function(mutations) {
+            originalAnalyzeMutations(mutations);
+            const detectedGenes = Array.from(new Set(mutations.map(m => m.Gene || m.gene)));
+            loadDiseaseForecast(detectedGenes);
+        }
     </script>
 </body>
 </html>

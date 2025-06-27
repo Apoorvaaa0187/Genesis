@@ -1,22 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Admin Login - GenGuard</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="flex items-center justify-center h-screen bg-gradient-to-br from-blue-100 to-blue-300">
-  <div class="bg-white p-10 rounded-lg shadow-xl w-full max-w-md">
-    <h2 class="text-2xl font-bold mb-6 text-center text-blue-700">Admin Login</h2>
-    <form onsubmit="return login(event)">
-      <input type="email" id="admin-email" placeholder="Email" required class="w-full px-4 py-2 mb-4 border rounded-lg">
-      <input type="password" id="admin-password" placeholder="Password" required class="w-full px-4 py-2 mb-4 border rounded-lg">
-      <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold">Login</button>
-    </form>
-    <p class="mt-4 text-sm text-center text-gray-500">Hint: admin@genlab.com / admin123</p>
+<body class="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-gray-900 flex items-center justify-center px-4 relative overflow-hidden">
+  
+  <!-- DNA Background -->
+  <div class="absolute inset-0 opacity-10 z-0">
+    <div class="dna-strand"></div>
+    <div class="dna-strand-2"></div>
   </div>
 
+  <!-- Particles -->
+  <div class="particles z-0">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <!-- Login Card -->
+  <div class="relative z-10 w-full max-w-md bg-white/10 backdrop-blur-lg p-10 rounded-3xl border border-white/20 shadow-2xl animate-fade-in text-white">
+    <div class="text-center mb-8">
+      <div class="text-5xl animate-pulse-slow mb-2">🏥</div>
+      <h2 class="text-3xl font-bold bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Admin Login</h2>
+      <p class="text-sm text-gray-300 mt-2">Secure access to patient genetic data</p>
+    </div>
+
+    <form onsubmit="return login(event)">
+      <input type="email" id="admin-email" placeholder="Email" required class="w-full px-4 py-2 mb-4 rounded-lg bg-white/20 text-white placeholder-gray-300 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-500">
+      <input type="password" id="admin-password" placeholder="Password" required class="w-full px-4 py-2 mb-4 rounded-lg bg-white/20 text-white placeholder-gray-300 border border-white/30 focus:outline-none focus:ring-2 focus:ring-purple-500">
+      <button type="submit" class="w-full py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white font-semibold rounded-lg transition-all duration-300">Login</button>
+    </form>
+
+    <p class="mt-4 text-xs text-center text-gray-400">Hint: admin@genlab.com / admin123</p>
+    <p class="text-[10px] text-center mt-6 text-gray-500">HIPAA Compliant • End-to-end Encryption</p>
+  </div>
+
+  <!-- Custom Styles -->
+  <style>
+    .animate-fade-in {
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    .animate-pulse-slow {
+      animation: pulse-slow 3s ease-in-out infinite;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes pulse-slow {
+      0%, 100% { transform: scale(1); filter: brightness(1); }
+      50% { transform: scale(1.05); filter: brightness(1.2); }
+    }
+
+    .dna-strand, .dna-strand-2 {
+      position: absolute;
+      width: 4px;
+      height: 80%;
+      border-radius: 2px;
+      animation: dna-rotate 8s linear infinite;
+    }
+
+    .dna-strand {
+      top: 10%;
+      left: 10%;
+      background: linear-gradient(45deg, #1e40af, #0ea5e9);
+    }
+
+    .dna-strand-2 {
+      top: 10%;
+      right: 10%;
+      background: linear-gradient(-45deg, #3730a3, #1e40af);
+      animation-direction: reverse;
+    }
+
+    @keyframes dna-rotate {
+      0% { transform: rotateZ(0deg) rotateY(0deg); }
+      100% { transform: rotateZ(360deg) rotateY(360deg); }
+    }
+
+    .particles {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(139, 92, 246, 0.6);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .particle:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
+    .particle:nth-child(2) { top: 60%; left: 80%; animation-delay: 1s; background: rgba(6, 182, 212, 0.6); }
+    .particle:nth-child(3) { top: 80%; left: 30%; animation-delay: 2s; background: rgba(236, 72, 153, 0.6); }
+    .particle:nth-child(4) { top: 30%; left: 70%; animation-delay: 3s; }
+    .particle:nth-child(5) { top: 50%; left: 10%; animation-delay: 4s; background: rgba(6, 182, 212, 0.6); }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) translateX(0px); opacity: 0.7; }
+      33% { transform: translateY(-20px) translateX(10px); opacity: 1; }
+      66% { transform: translateY(10px) translateX(-10px); opacity: 0.5; }
+    }
+
+    @media (max-width: 768px) {
+      .dna-strand, .dna-strand-2 {
+        display: none;
+      }
+    }
+  </style>
+
+  <!-- Login Script -->
   <script>
     function login(event) {
       event.preventDefault();
@@ -24,7 +129,7 @@
       const password = document.getElementById('admin-password').value;
 
       if (email === 'admin@genlab.com' && password === 'admin123') {
-        window.location.href = '/dashboard.html';
+        window.location.href = 'dashboard.html';
       } else {
         alert('Invalid credentials.');
       }
