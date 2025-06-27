@@ -1,8 +1,7 @@
-# 🏥 Hospital Admin Dashboard - GenGuard
+# 🧬 GenGuard – Secure DNA Analysis & Forecasting Portal
 
-A comprehensive hospital administration system for managing patient records and genetic mutation data with MongoDB integration.
-
-## 🚀 Features
+GenGuard is a powerful, AI-assisted web application designed for secure genetic data management and mutation analysis. The platform supports both personal users and hospital administrators, enabling them to upload, manage, and analyze DNA data to predict disease risks and genetic traits.
+---
 
 - **Admin Authentication**: Secure login system for hospital administrators
 - **Patient Management**: Add, view, and delete patient records
@@ -10,14 +9,6 @@ A comprehensive hospital administration system for managing patient records and 
 - **MongoDB Integration**: Persistent storage of patient data and file paths
 - **Real-time Analysis**: Parse and display mutation data in interactive tables
 - **File Management**: Automatic file upload handling and storage
-
-# 🧬 GenGuard – Secure DNA Analysis & Forecasting Portal
-
-GenGuard is a powerful, AI-assisted web application designed for secure genetic data management and mutation analysis. The platform supports both personal users and hospital administrators, enabling them to upload, manage, and analyze DNA data to predict disease risks and genetic traits.
-
-> 🔒 End-to-end encrypted & HIPAA compliant.
-
----
 
 ## 🚪 Access Levels
 
