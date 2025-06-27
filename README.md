@@ -11,135 +11,84 @@ A comprehensive hospital administration system for managing patient records and 
 - **Real-time Analysis**: Parse and display mutation data in interactive tables
 - **File Management**: Automatic file upload handling and storage
 
-## 📋 Database Schema
+# 🧬 GenGuard – Secure DNA Analysis & Forecasting Portal
 
-The system stores only 3 essential pieces of information per patient:
-- **Name**: Patient's full name
-- **Patient ID**: Unique identifier for each patient
-- **CSV File**: Path to the uploaded mutation data file
+GenGuard is a powerful, AI-assisted web application designed for secure genetic data management and mutation analysis. The platform supports both personal users and hospital administrators, enabling them to upload, manage, and analyze DNA data to predict disease risks and genetic traits.
 
-## 🛠️ Setup Instructions
+> 🔒 End-to-end encrypted & HIPAA compliant.
 
-### Prerequisites
-- Node.js (v14 or higher)
-- MongoDB (running locally on port 27017)
-- npm or yarn package manager
+---
 
-### Installation
+## 🚪 Access Levels
 
-1. **Clone and navigate to the project:**
-   ```bash
-   cd CIH-Hackthon-main
-   ```
+- **👤 Personal Access**
+  - Upload and view individual genetic analysis reports.
+  - Simple UI for non-technical users.
+  
+- **🏥 Admin Access**
+  - Manage multiple patient records.
+  - Upload CSV files containing genetic data.
+  - Perform large-scale mutation analysis.
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+---
 
-3. **Start MongoDB:**
-   Make sure MongoDB is running on your local machine:
-   ```bash
-   # On Windows
-   mongod
-   
-   # On macOS/Linux
-   sudo systemctl start mongod
-   ```
+## 🖼️ UI Preview
 
-4. **Start the server:**
-   ```bash
-   npm start
-   ```
+### 🔐 Home Portal
+Users are prompted to select either:
+- **Personal Access**: Upload and view personal DNA reports.
+- **Admin Access**: Manage patient genetic records and run mutation analysis tools.
 
-5. **Access the application:**
-   - Main Portal: http://localhost:5000
-   - Admin Login: http://localhost:5000/login.html
-   - Admin Dashboard: http://localhost:5000/dashboard.html
+### 📊 Admin Dashboard
+- **Add Patient Record**: Input name, ID, age, and upload a genetic data CSV.
+- **Patient Records Table**: Displays all uploaded records with file links and delete options.
+- **Multi-Patient Mutation Analysis**:
+  - Upload a batch CSV.
+  - Instantly analyze using the integrated AI pipeline.
 
-## 🔐 Admin Access
+---
 
-**Default Credentials:**
-- Email: `admin@genlab.com`
-- Password: `admin123`
+## ⚙️ Features
 
-## 📊 How to Use
+- 📁 **CSV Upload & Analysis**  
+  Upload single or multi-patient mutation data files for processing.
 
-### 1. Admin Login
-- Navigate to the admin login page
-- Enter the credentials above
-- You'll be redirected to the dashboard
+- 🧬 **Mutation Forecasting**  
+  Analyze gene mutations and forecast potential health risks.
 
-### 2. Add Patient Record
-- Fill in the patient name and ID
-- Upload a CSV file with mutation data
-- Click "Add Patient" to save to MongoDB
+- 🗂️ **Patient Record Management**  
+  Add, view, and delete patient entries with ease.
 
-### 3. View Patient Records
-- All saved patients are displayed in a table
-- Click "Refresh Records" to update the list
-- Delete patients using the delete button
+- 🤖 **AI-Enhanced Analysis** *(Optional expansion)*  
+  Integrate AI models (e.g., Hugging Face, Google Gemini) for advanced gene interpretation.
 
-### 4. Upload Multi-Patient CSV
-- Upload a CSV file with multiple patient mutations
-- The system will parse and analyze the data
-- View results in an interactive table format
+- 💻 **Responsive UI**  
+  Fully responsive and built using Tailwind CSS for seamless performance.
 
-### 5. Generate Reports
-- Click "Show Report" for any patient to view detailed mutation analysis
-- Reports open in a new tab with comprehensive genetic data
+---
 
-## 📁 Project Structure
+## 🛠️ Technologies Used
 
-```
-CIH-Hackthon-main/
-├── server.js              # Main Express server
-├── package.json           # Dependencies and scripts
-├── main/
-│   ├── admin/
-│   │   ├── login.html     # Admin login page
-│   │   └── dashboard.html # Admin dashboard
-│   └── user_site/
-│       ├── index.html     # Main portal
-│       └── html.html      # Patient report viewer
-├── uploads/               # CSV file storage
-└── data/                  # Sample data files
-```
+| Component            | Stack/Tools                       |
+|----------------------|-----------------------------------|
+| **Frontend**         | HTML, CSS, JavaScript             |
+| **Styling**          | Tailwind CSS                      |
+| **Icons**            | Font Awesome                     |
+| **CSV Parsing**      | JavaScript File APIs              |
+| **AI (Planned)**     | Google Gemini API, Hugging Face   |
 
-## 🔧 API Endpoints
+---
 
-- `POST /api/patient` - Add new patient with CSV file
-- `GET /api/patients` - Retrieve all patients
-- `DELETE /api/patient/:id` - Delete a patient record
+## 🧪 How to Use
 
-## 🧬 CSV Format
+### 🧬 For Personal Users
+1. Click **Personal Access** on the landing page.
+2. Upload your genetic report (CSV).
+3. View insights and possible risks.
 
-The system expects CSV files with the following columns:
-- `UserID` - Patient identifier
-- `Gene` - Gene name
-- `Mutation` - Mutation details
-
-## 🚨 Troubleshooting
-
-### MongoDB Connection Issues
-- Ensure MongoDB is running on port 27017
-- Check if the `hospitalDB` database is accessible
-
-### File Upload Issues
-- Verify the `uploads` directory exists
-- Check file permissions
-- Ensure CSV files are properly formatted
-
-### Server Issues
-- Check if port 5000 is available
-- Verify all dependencies are installed
-- Check console for error messages
-
-## 📝 License
-
-This project is licensed under the ISC License.
-
-## 🤝 Contributing
-
-Feel free to submit issues and enhancement requests!
-
+### 🏥 For Admins
+1. Click **Admin Access**.
+2. Add new patients with ID, name, and age.
+3. Upload each patient's mutation CSV.
+4. View or delete from the patient list.
+5. For batch uploads, use the **Multi-Patient Mutation Analysis** section.
