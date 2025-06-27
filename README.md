@@ -1,85 +1,121 @@
-# 🧬 GenGuard – Secure DNA Analysis & Forecasting Portal
+# GenGuard: Advanced DNA Mutation Analyzer
 
-GenGuard is a powerful, AI-assisted web application designed for secure genetic data management and mutation analysis. The platform supports both personal users and hospital administrators, enabling them to upload, manage, and analyze DNA data to predict disease risks and genetic traits.
----
-
-- **Admin Authentication**: Secure login system for hospital administrators
-- **Patient Management**: Add, view, and delete patient records
-- **CSV Upload**: Upload and analyze genetic mutation CSV files
-- **MongoDB Integration**: Persistent storage of patient data and file paths
-- **Real-time Analysis**: Parse and display mutation data in interactive tables
-- **File Management**: Automatic file upload handling and storage
-
-## 🚪 Access Levels
-
-- **👤 Personal Access**
-  - Upload and view individual genetic analysis reports.
-  - Simple UI for non-technical users.
-  
-- **🏥 Admin Access**
-  - Manage multiple patient records.
-  - Upload CSV files containing genetic data.
-  - Perform large-scale mutation analysis.
+GenGuard is a full-stack web application for advanced DNA mutation analysis and personalized disease risk forecasting. It is designed for hospitals, clinics, and research labs to upload, analyze, and visualize genetic data for individual patients or multiple patients at once.
 
 ---
 
-## 🖼️ UI Preview
+## Features
 
-### 🔐 Home Portal
-Users are prompted to select either:
-- **Personal Access**: Upload and view personal DNA reports.
-- **Admin Access**: Manage patient genetic records and run mutation analysis tools.
+- **User Portal**
+  - Personal login for patients/users
+  - Upload mutation and clinical variant CSV files
+  - View detailed mutation analysis results
+  - Disease Forecast Timeline: Personalized risk predictions by age (like 23andMe)
+  - Downloadable reports (PDF)
 
-### 📊 Admin Dashboard
-- **Add Patient Record**: Input name, ID, age, and upload a genetic data CSV.
-- **Patient Records Table**: Displays all uploaded records with file links and delete options.
-- **Multi-Patient Mutation Analysis**:
-  - Upload a batch CSV.
-  - Instantly analyze using the integrated AI pipeline.
+- **Admin Portal**
+  - Secure admin login
+  - Dashboard to add/view/delete patient records
+  - Upload and analyze multi-patient mutation CSVs
+  - View and manage all uploaded patient data
 
----
+- **Mutation Analysis**
+  - Matches user-uploaded mutations with clinical variant data (ClinVar)
+  - Calculates risk scores and clinical significance
+  - Visualizes results with tables and charts
+  - AI-powered insights and recommendations
 
-## ⚙️ Features
+- **Multi-Patient Analysis**
+  - Upload a CSV with multiple patients and mutations
+  - See a matrix of which patients have which mutations
+  - Generate individual patient reports
 
-- 📁 **CSV Upload & Analysis**  
-  Upload single or multi-patient mutation data files for processing.
-
-- 🧬 **Mutation Forecasting**  
-  Analyze gene mutations and forecast potential health risks.
-
-- 🗂️ **Patient Record Management**  
-  Add, view, and delete patient entries with ease.
-
-- 🤖 **AI-Enhanced Analysis** *(Optional expansion)*  
-  Integrate AI models (e.g., Hugging Face, Google Gemini) for advanced gene interpretation.
-
-- 💻 **Responsive UI**  
-  Fully responsive and built using Tailwind CSS for seamless performance.
+- **Modern UI/UX**
+  - Responsive design with Tailwind CSS
+  - Interactive charts (Chart.js)
+  - AI chat assistant for genetic queries
 
 ---
 
-## 🛠️ Technologies Used
-
-| Component            | Stack/Tools                       |
-|----------------------|-----------------------------------|
-| **Frontend**         | HTML, CSS, JavaScript             |
-| **Styling**          | Tailwind CSS                      |
-| **Icons**            | Font Awesome                     |
-| **CSV Parsing**      | JavaScript File APIs              |
-| **AI (Planned)**     | Google Gemini API, Hugging Face   |
+## Technologies Used
+- **Frontend:** HTML, CSS (Tailwind), JavaScript
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB (local, via Mongoose ODM)
+- **CSV Parsing:** PapaParse
+- **Charts:** Chart.js
+- **PDF Export:** html2pdf.js
 
 ---
 
-## 🧪 How to Use
+## Project Structure
 
-### 🧬 For Personal Users
-1. Click **Personal Access** on the landing page.
-2. Upload your genetic report (CSV).
-3. View insights and possible risks.
+```
+CIH-Hackthon-main/
+├── main/
+│   ├── admin/           # Admin dashboard, login, and scripts
+│   ├── user/            # User login page
+│   └── user_site/       # User portal, results, and UI
+├── data/                # All CSV data files (mutations, clinvar, forecast, etc.)
+├── uploads/             # Uploaded patient CSVs
+├── server.js            # Main backend server
+├── package.json         # Node.js dependencies
+└── README.md            # This file
+```
 
-### 🏥 For Admins
-1. Click **Admin Access**.
-2. Add new patients with ID, name, and age.
-3. Upload each patient's mutation CSV.
-4. View or delete from the patient list.
-5. For batch uploads, use the **Multi-Patient Mutation Analysis** section.
+---
+
+## Setup & Usage
+
+### 1. Prerequisites
+- Node.js and npm installed
+- MongoDB installed and running locally (default port 27017)
+
+### 2. Install Dependencies
+```
+npm install
+```
+
+### 3. Start the Server
+```
+node server.js
+```
+
+### 4. Access the App
+- Open [http://localhost:5000/](http://localhost:5000/) in your browser
+- Use the **Personal Login** or **Admin Login**
+
+### 5. Demo Credentials
+- **Admin:**
+  - Email: `admin@genlab.com`
+  - Password: `admin123`
+- **User:**
+  - Email: `user@demo.com`
+  - Password: `user123`
+
+---
+
+## Data Files
+- Place your CSV files in the `data/` folder:
+  - `mutations.csv`, `clinvar_data.csv`, `mutation_disease_forecast.csv`, etc.
+- Uploaded files are stored in `uploads/`
+
+---
+
+## How MongoDB is Used
+- All patient and user data is stored in a local MongoDB database (`hospitalDB`)
+- Mongoose is used for schema modeling and CRUD operations
+- Can be switched to MongoDB Atlas by changing the connection string
+
+---
+
+## What's Incorporated
+- User and admin authentication
+- Patient record management
+- File upload and storage
+- Mutation and disease risk analysis
+- Personalized disease forecast timeline
+- Multi-patient CSV analysis
+- Interactive charts and AI insights
+- Modern, responsive UI
+
+---
